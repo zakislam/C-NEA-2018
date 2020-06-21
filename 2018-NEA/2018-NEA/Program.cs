@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -10,6 +11,8 @@ namespace _2018_NEA
 {
     class Program
     {
+        static string password;
+
         static string[,] Bio_questions = { {"1.Name the organelles where protiens are synthesised? A.Ribosome or B.Mitchodria: ","2.What enzyme breaks down carbohydrases? A.Lipids or B.Carbohydrases: ","3.What is meant by the definition of comunicable disease? A.The disease can talk or B.A disease that can be transmitted from person to person: ","4.Define photosynthesis? A.the process where plants sunlight to synthesize nutrients from carbon dioxide and water or B.Where plants take pictures: ","5.What part of your body never stops growing? A.Ears or B.Hands: " },
                 {"1.Name the organelles where protiens are synthesised? A.Ribosome or B.Mitchodria or C.Nucleaus: ","2.What enzyme breaks down carbohydrases? A.Lipids or B.Carbohydrases or C.Protease: ","3.What is meant by the definition of comunicable disease? A.The disease can talk or B.A disease that can be transmitted from person to person or C.A disease that can\"t be transmitted from person to person: ","4.Define photosynthesis? A.the process where plants sunlight to synthesize nutrients from carbon dioxide and water or B.Where plants take pictures or C.Where plants use sunlight and oxygen to synthesize nutrients?: ","5.What part of your body never stops growing? A.Ears or B.Hands or C.Feet: " },
                 { "1.Name the organelles where protiens are synthesised? A.Ribosome or B.Mitchodria or C.Nucleaus or D.Vacuole: ","2.What enzyme breaks down carbohydrases? A.Lipids or B.Carbohydrases or C.Protease or D.Amylase: ","3.What is meant by the definition of comunicable disease? A.The disease can talk or B.A disease that can be transmitted from person to person or C.A disease that can\"t be transmitted from person to person or D.A communist disease: ","4.Define photosynthesis? A.the process where plants sunlight to synthesize nutrients from carbon dioxide and water or B.Where plants take pictures or C.Where plants use sunlight and oxygen to synthesize nutrients or D.Where plants user CO2 and glucose to produce Oxygen: ","5.What part of your body never stops growing? A.Ears or B.Hands or C.Feet D.Body: "} };
@@ -66,8 +69,9 @@ namespace _2018_NEA
             }
         }
 
-        static void Register() {
-            string name, surname, age, username, password, filepath;
+        static void Register()
+        {
+            string name, surname, age, username, password, filepath, userchoice;
             filepath = "username.csv";
             Console.WriteLine("Please enter your name: ");
             name = Console.ReadLine();
@@ -84,13 +88,18 @@ namespace _2018_NEA
             {
                 file.WriteLine(name + "," + surname + "," + age + "," + username + "," + password);
             }
+            Console.WriteLine("Would you like to login? Please enter your choice as yes or no.: ");
+            userchoice = Console.ReadLine().ToLower();
+            if (userchoice == "yes")
+            {
+                Login();
 
-            Login();
+            }
+
         }
-
         static void Login() {
             while (true) {
-                string username, password, filepath,topic, difficulty;
+                string username, filepath,topic, difficulty, rest;
                 filepath = "username.csv";
                 Console.WriteLine("Please enter your username: ");
                 username = Console.ReadLine();
@@ -139,61 +148,51 @@ namespace _2018_NEA
                 else if (Usercheck(filepath, username) == false){
                     Console.WriteLine("Incorrect username");
                 }
-                
+
+                if (Usercheck(filepath, username) | Passwordcheck(filepath, password) == false) {
+                    Console.WriteLine("Would you like to rest your username and password?. Please yes or no: ");
+                    rest = Console.ReadLine().ToLower();
+
+                    if (rest == "yes")
+                    {
+                        Rest(filepath, username, password);
+                        break;
+                    }
+
+                    else {
+                        break;
+                    }
+                }
             }
-            
         }
 
         static void Teacher()
         {
-            string username, password, filepath, filepath1;
+            string username, password, filepath, user, pass;
             Console.WriteLine("PLease enter the teacher username: ");
             username = Console.ReadLine();
+            user = "Admin";
+            pass = "Admin123";
 
-            filepath = "username.csv";
-
-            if (Usercheck(filepath, username) == true)
+            if (user == username)
             {
                 Console.WriteLine("Please enter your password: ");
                 password = Console.ReadLine();
-                if (Passwordcheck(filepath, password) == true)
+                if (pass == password)
                 {
-                    filepath1 = "score.csv";
-                    string[] lines = System.IO.File.ReadAllLines(@filepath1);
-
-                    Console.WriteLine(String.Join(Environment.NewLine, lines));                }
-            }
-        }
-
-        static bool Usercheck(string filepath, string username) {
-            string[] lines = System.IO.File.ReadAllLines(@filepath);
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string[] fields = lines[i].Split(",");
-                if (fields.Contains(username))
+                    filepath = "score.csv";
+                    string[] lines = System.IO.File.ReadAllLines(@filepath);
+                    Console.WriteLine(String.Join(Environment.NewLine, lines));
+                }
+                else
                 {
-                    Console.WriteLine("User found");
-                    return true;
+                    Console.WriteLine("Incorrect password");
                 }
             }
-            return false;
-        }
 
-        static bool Passwordcheck(string filepath, string Password)
-        {
-            string[] lines = System.IO.File.ReadAllLines(@filepath);
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string[] fields = lines[i].Split(",");
-                if (fields.Contains(Password))
-                {
-                    Console.WriteLine("Password found");
-                    return true;
-                }
+            else {
+                Console.WriteLine("Incorrect username");
             }
-            return false;
         }
 
         static void Bio_CS(string username, string difficulty, string topic)
@@ -602,6 +601,98 @@ namespace _2018_NEA
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
             {
                 file.WriteLine(username + "," + difficulty + "," + topic + "," + score);
+            }
+        }
+
+        static bool Usercheck(string filepath, string username)
+        {
+            string[] lines = System.IO.File.ReadAllLines(@filepath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] fields = lines[i].Split(",");
+                if (fields.Contains(username))
+                {
+                    Console.WriteLine("User found");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Passwordcheck(string filepath, string Password)
+        {
+            string[] lines = System.IO.File.ReadAllLines(@filepath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] fields = lines[i].Split(",");
+                if (fields.Contains(Password))
+                {
+                    Console.WriteLine("Password found");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static void Rest(string filepath, string username, string password) {
+            string rest, name, findusername;
+
+            Console.WriteLine("What would you like to change? A.Username or B.Password: ");
+            rest = Console.ReadLine().ToLower();
+
+            if (rest == "a")
+            {
+                Console.WriteLine("Please enter the name assosiated with the username: ");
+                name = Console.ReadLine();
+                
+                string[] lines = System.IO.File.ReadAllLines(@filepath);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] fields = lines[i].Split(",");
+                    if (fields.Contains(name))
+                    {
+                        Console.WriteLine("Name located");
+
+                        List<string> list = new List<string>(lines);
+                        list.Sort();
+                        list.Remove(lines[i]);
+                        System.IO.File.WriteAllLines(@filepath, list);
+                        Console.WriteLine("Now taking you to the registration form");
+
+                        Register();
+                    }
+                }
+            }
+
+            else if (rest == "b")
+            {
+                Console.WriteLine("Please enter the username assosiated with the username: ");
+                findusername = Console.ReadLine();
+
+                string[] lines = System.IO.File.ReadAllLines(@filepath);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] fields = lines[i].Split(",");
+                    if (fields.Contains(findusername))
+                    {
+                        Console.WriteLine("Username located");
+
+                        List<string> list = new List<string>(lines);
+                        list.Sort();
+                        list.Remove(lines[i]);
+                        System.IO.File.WriteAllLines(@filepath, list);
+                        Console.WriteLine("Now taking you to the registration form");
+
+                        Register();
+                    }
+                }
+            }
+
+            else
+            {
+                Console.WriteLine("Invalid response");
             }
         }
     }
