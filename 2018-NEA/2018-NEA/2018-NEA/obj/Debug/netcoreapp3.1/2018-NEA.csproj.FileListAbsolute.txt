@@ -1,0 +1,13 @@
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.csproj.CoreCompileInputs.cache
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.AssemblyInfoInputs.cache
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.AssemblyInfo.cs
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\bin\Debug\netcoreapp3.1\2018-NEA.exe
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\bin\Debug\netcoreapp3.1\2018-NEA.deps.json
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\bin\Debug\netcoreapp3.1\2018-NEA.runtimeconfig.json
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\bin\Debug\netcoreapp3.1\2018-NEA.runtimeconfig.dev.json
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\bin\Debug\netcoreapp3.1\2018-NEA.dll
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\bin\Debug\netcoreapp3.1\2018-NEA.pdb
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.dll
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.pdb
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.genruntimeconfig.cache
+E:\Random projects\C# version of 2018 NEA\2018-NEA\2018-NEA\obj\Debug\netcoreapp3.1\2018-NEA.csprojAssemblyReference.cache
